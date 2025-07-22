@@ -9,7 +9,7 @@ const store = new Vuex.Store({
 
 
 const Inicio = { template: '<web-login></web-login>' }
-const Web_registro = { template: '<web-registro></web-registro>' }
+const Web_home = { template: '<web-home></web-home>' }
 const Web_regEst = { template: '<web-regEst></web-regEst>' }
 const Web_regDoc = { template: '<web-regDoc></web-regDoc>' }
 const Web_citas = { template: '<web-citas></web-citas>' }
@@ -17,7 +17,7 @@ const Web_login = { template: '<web-login></web-login>' }
 
 const routes = [
   { path: '/', component: Inicio },
-  { path: '/web-registro', component: Web_registro },
+  { path: '/web-home', component: Web_home, meta: { requiresAuth: true }},
   { path: '/web-regEst', component: Web_regEst },
   { path: '/web-regDoc', component: Web_regDoc },
   { path: '/web-citas', component: Web_citas, meta: { requiresAuth: true } }, // se agrega "meta: { requiresAuth: true }" para cuando requiera autenticar

@@ -30,7 +30,7 @@ app.component("web-login", {
               </div>
             </div>
             <div class="card-body">
-              <form role="form" class="text-start" @submit.prevent="revDatos">
+              <form class="text-start" @submit.prevent="revDatos">
                 <div class="input-group input-group-outline my-3">
                   <label class="form-label">Correo electrónico</label>
                   <input type="email" class="form-control" v-model="nCorreo" required/>
@@ -52,7 +52,7 @@ app.component("web-login", {
                   <label class="form-check-label mb-0 ms-3" for="rememberMe">Recuérdame</label>
                 </div>
                 <div class="text-center">
-                  <button type="button" class="btn bg-gradient-dark w-100 my-4 mb-2" :disabled="this.nCorreo != '' && this.passUsr != '' && this.passUsrDos != '' && this.validaBtn === true ? this.estadoBtn = flase : this.estadoBtn = true">Iniciar sesión</button>
+                  <button class="btn bg-gradient-dark w-100 my-4 mb-2" :disabled="this.nCorreo != '' && this.passUsr != '' && this.passUsrDos != '' && this.validaBtn === true ? this.estadoBtn = flase : this.estadoBtn = true">Iniciar sesión</button>
                 </div>
               </form>
             </div>
@@ -135,7 +135,7 @@ app.component("web-login", {
   methods: {
     revDatos() {
       axios
-        .post("../proveedores-corsec/verifica/alta.app", {
+        .post("../proveedores-corsec/verifica/verifica.app", {
           opcion: 1,
           nCorreo: this.nCorreo,
           passUsr: this.passUsr,
@@ -165,7 +165,7 @@ app.component("web-login", {
             });
           } else {
             this.datos = response.data;
-            // console.log(response.data)
+            console.log(response.data)
           }
         })
         .catch((error) => {
@@ -177,6 +177,7 @@ app.component("web-login", {
           });
         });
     },
+
     // ####
     checkAuth() {
       return localStorage.getItem("isAuthenticated") === "true";
@@ -193,6 +194,32 @@ app.component("web-login", {
       const redirectTo = this.redirectUrl || "/proveedores-corsec/#/web-citas";
       window.location = redirectTo;
     }
-   },
+  },
+  mounted() { },
+});
+
+app.component("web-home", {
+  template: /*html*/ `
+<h1>home</h1>
+`,
+  data() {
+    return {
+      datos: "",
+    };
+  },
+  computed: {
+  },
+  methods: {
+    logout() {
+      // Eliminar el estado de autenticación
+      localStorage.removeItem("isAuthenticated");
+
+      // Redirigir a la página de inicio
+      window.location = "/proveedores-corsec/#/";
+    },
+
+  },
+  created() {
+  },
   mounted() { },
 });
