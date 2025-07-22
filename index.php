@@ -29,7 +29,7 @@
     <script src="assets/js/vuex.js"></script>
 </head>
 
-<body class="bg-gray-200">
+<body class="g-sidenav-show  bg-gray-100">
 
     <div class="container-fluid" id="app">
         <router-view></router-view>
