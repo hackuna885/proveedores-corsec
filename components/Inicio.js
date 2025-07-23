@@ -52,7 +52,7 @@ app.component("web-home", {
                   <label class="form-check-label mb-0 ms-3" for="rememberMe">Recuérdame</label>
                 </div>
                 <div class="text-center">
-                  <button class="btn bg-gradient-dark w-100 my-4 mb-2" :disabled="!(nCorreo && passUsr && passUsrDos && validaBtn)">Iniciar sesión</button>
+                  <button class="btn bg-gradient-dark w-100 my-4 mb-2" :disabled="!formularioValido">Iniciar sesión</button>
                 </div>
               </form>
             </div>
@@ -90,44 +90,36 @@ app.component("web-home", {
     };
   },
   computed: {
+    
     validaContrasena() {
       this.notificaEstadoPass = "small alert alert-light text-muted";
+      this.validaBtn = false;
 
-      if (this.passUsr.length >= 6) {
-        this.estadoPass = false;
-        this.msgAlert =
-          "La contraseña debe tener al menos seis (6) caracteres.";
-        this.validaBtn = false;
-
-        if (this.passUsrDos.length >= 6) {
-          if (this.passUsr === this.passUsrDos) {
-            this.notificaEstadoPass = "small alert alert-success text-white";
-            this.msgAlert = "Contraseña valida.";
-            this.validaBtn = true;
-          } else {
-            this.notificaEstadoPass = "small alert alert-danger";
-            this.msgAlert = "¡Error! Las contraseñas no coinciden.";
-            this.validaBtn = false;
-          }
-        } else {
-          this.estadoPass = false;
-          this.validaBtn = false;
-        }
-      } else {
-        this.msgAlert =
-          "La contraseña debe tener al menos seis (6) caracteres.";
-
-        if (this.passUsrDos != "") {
-          this.estadoPass = false;
-          this.validaBtn = false;
-        } else {
-          this.estadoPass = true;
-          this.validaBtn = false;
-        }
+      if (this.passUsr.length < 6) {
+        this.estadoPass = true;
+        return "La contraseña debe tener al menos seis (6) caracteres.";
       }
 
-      return this.msgAlert;
+      this.estadoPass = false;
+
+      if (this.passUsrDos.length < 6) {
+        return "La segunda contraseña también debe tener al menos seis (6) caracteres.";
+      }
+
+      if (this.passUsr !== this.passUsrDos) {
+        this.notificaEstadoPass = "small alert alert-danger";
+        return "¡Error! Las contraseñas no coinciden.";
+      }
+
+      this.notificaEstadoPass = "small alert alert-success text-white";
+      this.validaBtn = true;
+      return "Contraseña válida.";
     },
+    // valida boton
+    formularioValido() {
+      return this.nCorreo && this.passUsr && this.passUsrDos && this.validaBtn;
+    },
+    // valida boton
     currentYear() {
       return new Date().getFullYear();
     }
@@ -192,9 +184,9 @@ app.component("web-home", {
     this.redirectUrl = urlParams.get("redirect");
 
     // Si el usuario ya está autenticado, redirigir inmediatamente
-    if (this.checkAuth()) {
-      const redirectTo = this.redirectUrl || "/proveedores-corsec/#/web-dashBoard";
-      window.location = redirectTo;
+    if (this.checkAuth()) {      
+      const redirectTo = this.redirectUrl || "/web-dashBoard";
+      this.$router.push(redirectTo);
     }
   },
   mounted() { },
@@ -624,7 +616,7 @@ app.component("web-dashBoard", {
         
         <hr class="horizontal dark my-sm-4">
         <!-- salir de sesión -->
-        <router-link to="/" @click.native="logout" class="btn bg-gradient-info w-100">Salir de sesión</router-link>
+        <router-link to="/" @click="logout" class="btn bg-gradient-info w-100">Salir de sesión</router-link>
         <!-- salir de sesión -->
       </div>
     </div>
@@ -641,7 +633,6 @@ app.component("web-dashBoard", {
     logout() {
       // Eliminar el estado de autenticación
       localStorage.removeItem("isAuthenticated");
-
       // Redirigir a la página de login
       this.$router.push('/');
     },

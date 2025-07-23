@@ -5,7 +5,7 @@ const Web_citas = { template: '<web-citas></web-citas>' }
 
 const routes = [
   { path: '/', component: Inicio },
-  { path: '/web-dashBoard', component: Web_dashBoard, meta: { requiresAuth: true } }, // se agrega "meta: { requiresAuth: true }" para cuando requiera autenticar
+  { path: '/web-dashBoard', component: Web_dashBoard, meta: { requiresAuth: true } },
   { path: '/web-regDoc', component: Web_regDoc },
   { path: '/web-citas', component: Web_citas }
 ]
@@ -15,37 +15,41 @@ const router = VueRouter.createRouter({
     routes,
 })
 
-// Inicia Autenticación
+// Función global para reinicializar Material Dashboard
+window.reinitializeMaterialDashboard = function() {
+  // Código de inicialización aquí
+};
 
+// Ejecutar después de cada cambio de ruta
+router.afterEach((to, from) => {
+  setTimeout(() => {
+    if (typeof window.reinitializeMaterialDashboard === 'function') {
+      window.reinitializeMaterialDashboard();
+    }
+  }, 200);
+});
+
+// Inicia Autenticación
 router.beforeEach((to, from, next) => {
   const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
   
   if (to.matched.some(record => record.meta.requiresAuth)) {
-    // Esta ruta requiere autenticación
     if (!isAuthenticated) {
-      // No autenticado, redirige a la página de inicio de sesión
       next({
         path: '/',
         query: { redirect: to.fullPath }
       });
     } else {
-      // Autenticado, procede
       next();
     }
   } else {
-    // No requiere autenticación
     next();
   }
 });
 // Termina Autenticación
 
-
-  
 const app = Vue.createApp({
     data() {
-        return {
-            
-        }
+        return {}
     }
 })
-
