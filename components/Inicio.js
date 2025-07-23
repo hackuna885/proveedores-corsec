@@ -1,4 +1,4 @@
-app.component("web-login", {
+app.component("web-home", {
   template: /*html*/ `
 <main class="main-content mt-0">
   <div class="page-header align-items-start min-vh-100" style="background-image: url('assets/img/bgLogin.jpg');">
@@ -155,13 +155,13 @@ app.component("web-login", {
                 const redirectUrl = new URLSearchParams(
                   window.location.search
                 ).get("redirect");
-                // Redireccionar a la ruta original o a web-home
+                // Redireccionar a la ruta original o a web-dashBoard
                 if (redirectUrl) {
                   // no pasa
                   this.$router.push(redirectUrl);
                 } else {
                   // manda al home
-                  this.$router.push('/web-home');
+                  this.$router.push('/web-dashBoard');
                 }
               },
             });
@@ -193,14 +193,14 @@ app.component("web-login", {
 
     // Si el usuario ya está autenticado, redirigir inmediatamente
     if (this.checkAuth()) {
-      const redirectTo = this.redirectUrl || "/proveedores-corsec/#/web-home";
+      const redirectTo = this.redirectUrl || "/proveedores-corsec/#/web-dashBoard";
       window.location = redirectTo;
     }
   },
   mounted() { },
 });
 
-app.component("web-home", {
+app.component("web-dashBoard", {
   template: /*html*/ `
 <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-radius-lg fixed-start ms-2  bg-white my-2" id="sidenav-main">
     <div class="sidenav-header">
