@@ -23,7 +23,6 @@
     <!-- Material Icons -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
     <!-- CSS Files -->
-    <!-- <link id="pagestyle" href="https://cdn.jsdelivr.net/npm/material-dashboard-react@1.10.0/src/assets/jss/material-dashboard-react.min.js?v=1.0.1" rel="stylesheet" /> -->
     <link id="pagestyle" href="assets/css/material-dashboard.css?v=3.2.0" rel="stylesheet" />
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="assets/js/vue.js"></script>
