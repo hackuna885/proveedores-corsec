@@ -52,7 +52,7 @@ app.component("web-login", {
                   <label class="form-check-label mb-0 ms-3" for="rememberMe">Recuérdame</label>
                 </div>
                 <div class="text-center">
-                  <button class="btn bg-gradient-dark w-100 my-4 mb-2" :disabled="this.nCorreo != '' && this.passUsr != '' && this.passUsrDos != '' && this.validaBtn === true ? this.estadoBtn = flase : this.estadoBtn = true">Iniciar sesión</button>
+                  <button class="btn bg-gradient-dark w-100 my-4 mb-2" :disabled="!(nCorreo && passUsr && passUsrDos && validaBtn)">Iniciar sesión</button>
                 </div>
               </form>
             </div>
@@ -150,16 +150,18 @@ app.component("web-login", {
               title: "¡Bienvenido!",
               showConfirmButton: false,
               timer: 2000,
-              onClose: () => {
+              willClose: () => {
                 // Obtener la URL de redirección si existe
                 const redirectUrl = new URLSearchParams(
                   window.location.search
                 ).get("redirect");
                 // Redireccionar a la ruta original o a web-home
                 if (redirectUrl) {
-                  window.location = redirectUrl;
+                  // no pasa
+                  this.$router.push(redirectUrl);
                 } else {
-                  window.location = "/proveedores-corsec/#/web-home";
+                  // manda al home
+                  this.$router.push('/web-home');
                 }
               },
             });
@@ -622,7 +624,7 @@ app.component("web-home", {
         
         <hr class="horizontal dark my-sm-4">
         <!-- salir de sesión -->
-        <button @click="logout" class="btn bg-gradient-info w-100" href="#">Salir de sesión</button>
+        <router-link to="/" @click.native="logout" class="btn bg-gradient-info w-100">Salir de sesión</router-link>
         <!-- salir de sesión -->
       </div>
     </div>
@@ -640,8 +642,8 @@ app.component("web-home", {
       // Eliminar el estado de autenticación
       localStorage.removeItem("isAuthenticated");
 
-      // Redirigir a la página de inicio
-      window.location = "/proveedores-corsec/#/";
+      // Redirigir a la página de login
+      this.$router.push('/');
     },
 
   },

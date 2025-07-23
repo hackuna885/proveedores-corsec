@@ -19,7 +19,7 @@
     <link href="assets/css/hover.css" rel="stylesheet" />
     <link href="assets/css/sweetalert2.min.css" rel="stylesheet" />
     <!-- Font Awesome Icons -->
-    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/42d5adcbca.js?v=1.0.1" crossorigin="anonymous"></script>
     <!-- Material Icons -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
     <!-- CSS Files -->
@@ -43,7 +43,6 @@
     <script src="assets/js/main.js"></script>
     <script src="components/Inicio.js?v=1.0.1"></script>
     <script>
-        app.use(store);
         app.use(router)
         app.mount("#app")
     </script>

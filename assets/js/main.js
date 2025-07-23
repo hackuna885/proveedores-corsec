@@ -17,10 +17,10 @@ const Web_login = { template: '<web-login></web-login>' }
 
 const routes = [
   { path: '/', component: Inicio },
-  { path: '/web-home', component: Web_home, meta: { requiresAuth: true } },
+  { path: '/web-home', component: Web_home, meta: { requiresAuth: true } }, // se agrega "meta: { requiresAuth: true }" para cuando requiera autenticar
   { path: '/web-regEst', component: Web_regEst },
   { path: '/web-regDoc', component: Web_regDoc },
-  { path: '/web-citas', component: Web_citas }, // se agrega "meta: { requiresAuth: true }" para cuando requiera autenticar
+  { path: '/web-citas', component: Web_citas }, 
   { path: '/web-login', component: Web_login }
 ]
 
