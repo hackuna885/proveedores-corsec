@@ -190,6 +190,7 @@ app.component("web-home", {
     }
   },
   mounted() { },
+  
 });
 
 app.component("web-dashBoard", {

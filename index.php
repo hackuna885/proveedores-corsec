@@ -39,21 +39,21 @@
 
     <!-- componentes Vue.js -->
     <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/core/popper.min.js"></script>
+    <script src="assets/js/core/bootstrap.min.js"></script>
+    <script src="assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="assets/js/plugins/smooth-scrollbar.min.js"></script>
     <script src="assets/js/axios.min.js"></script>
     <script src="assets/js/sweetalert2.js"></script>
     <script src="assets/js/main.js"></script>
     <script src="components/Inicio.js?v=1.0.1"></script>
     <script>
         app.use(router)
-        app.mount("#app")
+        app.mount("#app")        
     </script>
     <!-- componentes Vue.js -->
 
     <!--   Core JS Files   -->
-    <script src="assets/js/core/popper.min.js"></script>
-    <script src="assets/js/core/bootstrap.min.js"></script>
-    <script src="assets/js/plugins/perfect-scrollbar.min.js"></script>
-    <script src="assets/js/plugins/smooth-scrollbar.min.js"></script>
     <script>
         var win = navigator.platform.indexOf('Win') > -1;
         if (win && document.querySelector('#sidenav-scrollbar')) {
@@ -63,8 +63,6 @@
             Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
         }
     </script>
-    <!-- Github buttons -->
-    <script async defer src="assets/js/buttons.js"></script>
     <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="assets/js/material-dashboard.min.js?v=3.2.0"></script>
 </body>
